@@ -4,9 +4,10 @@ on:
   push:
     branches:
     - main
+    - main-mlflow
   pull_request:
     branches:
-    - main
+    - main-mlflow
 
 jobs:
   build:
@@ -39,7 +40,7 @@ jobs:
       env:
         HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-      if: github.ref == 'refs/heads/main' && job.status == 'success'
+      if: github.ref == 'refs/heads/main-mlflow' && job.status == 'success'
       run: |
         git remote add heroku https://heroku:HRKU-52378812-6333-4b17-8679-67a8b1e5f7c1@git.heroku.com/mlops-dvc.git
         git push heroku HEAD:main -f
